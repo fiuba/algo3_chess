@@ -1,0 +1,52 @@
+@startuml
+
+class Jugador {
+        + juegaEnCon(t: Tablero, c: Color)
+        + moverA(f: Pieza, p: Posicion) boolean
+}
+
+class Tablero {
+        + agregar(f: Pieza, p: Posicion)
+        + colocarEn(f: Pieza, p: Posicion )
+        + moverA(f : Pieza, p : Posicion) : boolean
+
+        + buscarCeldaEn(p: Posicion) : Celda
+        + contenidoDe(p: Posicion) : Pieza
+        + piezaEn(p: Posicion) : Pieza
+}
+
+class Celda {
+        + contenido(f: Pieza)
+        
+        + es(p: Posicion) : boolean
+        + pieza() : Pieza
+}
+
+class Posicion {
+        - columna
+        - fila
+
+        + esIgualA(o: Posicion) boolean
+}
+
+class Pieza {
+        + mismoColor(f : Pieza) boolean
+}
+
+interface Color {
+        + mismoColor(c : Color) boolean
+}
+
+Jugador .> Tablero
+Jugador .> Pieza
+
+Tablero *-- "64" Celda
+
+Celda o- Posicion
+Celda o- Pieza
+Pieza *-- Color
+
+Color <|.. Blanco
+Color <|.. Negro
+
+@enduml
